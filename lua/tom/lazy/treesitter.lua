@@ -25,7 +25,7 @@ return {
 
 
         local ignoreFileTypes = {
-            'TelescopePromt',
+            'TelescopePrompt',
             'oil',
 
         }
