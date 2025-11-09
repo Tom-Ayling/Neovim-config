@@ -20,6 +20,7 @@ return{
             require ('mini.icons').setup()
             require ('mini.icons').mock_nvim_web_devicons()
             require ('mini.surround').setup()
+            require ('mini.splitjoin').setup()
 
         end
     }
