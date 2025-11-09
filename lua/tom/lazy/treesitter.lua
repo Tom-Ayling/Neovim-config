@@ -5,7 +5,7 @@ return {
     build = ':TSUpdate',
 
     config = function()
-        require'nvim-treesitter'.setup {
+        require 'nvim-treesitter'.setup {
             install_dir = vim.fn.stdpath('data') .. '/site',
         }
 
@@ -21,6 +21,13 @@ return {
             'css',
             'vim',
             'vimdoc',
+        }
+
+
+        local ignoreFileTypes = {
+            'TelescopePromt',
+            'oil',
+
         }
 
         -- Install missing parsers on startup
@@ -43,6 +50,10 @@ return {
 
         -- Auto-install missing parsers for FileType
         local function ensure_parser_installed(lang)
+            if vim.tbl_contains(ignoreFileTypes, lang) then
+                return
+            end
+
             local installed = require("nvim-treesitter.config").get_installed()
             if not vim.tbl_contains(installed, lang) then
                 vim.schedule_wrap(function()
@@ -52,7 +63,7 @@ return {
             end
         end
 
-        -- Enable Treesitter features 
+        -- Enable Treesitter features
         vim.api.nvim_create_autocmd('FileType', {
             pattern = '*',
             callback = function(args)
@@ -72,4 +83,3 @@ return {
         })
     end,
 }
-
