@@ -21,8 +21,8 @@ return {
         telescope.setup({
             extensions = {
                 themes = {
-                    enable_previewer = true,          
-                    enable_live_preview = true, 
+                    enable_previewer = true,
+                    enable_live_preview = true,
                     persist = {
                         enabled = true,
                         path = vim.fn.stdpath('config') .. '/lua/tom/after/colorscheme.lua'}

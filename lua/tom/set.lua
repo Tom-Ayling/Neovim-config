@@ -54,3 +54,11 @@ vim.o.showmode = false
 -- Decrease update time
 vim.o.updatetime = 250
 
+vim.diagnostic.config({
+  virtual_text = true,  -- show inline text
+  signs = true,         -- show signs in the gutter
+  underline = true,     -- underline the problem
+  update_in_insert = false, -- don't update diagnostics while typing
+})
+
+
