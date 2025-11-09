@@ -1,6 +1,3 @@
--- Set colour shceme
--- vim.cmd.colorscheme "catppuccin"
-
 -- Line numbers
 vim.o.nu = true
 vim.o.relativenumber = true
@@ -53,3 +50,7 @@ vim.g.have_nerd_font = true
 
 -- Disable showing editor mode as it is provided by mini.statusline
 vim.o.showmode = false
+
+-- Decrease update time
+vim.o.updatetime = 250
+
