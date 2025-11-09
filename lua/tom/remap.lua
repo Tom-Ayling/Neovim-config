@@ -2,7 +2,10 @@
 vim.g.mapleader = ' '
 
 -- Open netrw
-vim.keymap.set('n','<leader>ov', vim.cmd.Ex, {desc = 'Open netrw'})
+-- vim.keymap.set('n','<leader>ov', vim.cmd.Ex, {desc = 'Open netrw'})
+
+-- Open oil.nvim
+vim.keymap.set('n','<leader>ov', '<CMD>Oil<CR>', {desc = 'Open oil.nvim'})
 
 -- Clear highlights on escape in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', {desc = 'Clear highlights'})
