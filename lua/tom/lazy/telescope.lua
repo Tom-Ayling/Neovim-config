@@ -6,7 +6,8 @@ return {
         'nvim-lua/plenary.nvim',
         {
             'nvim-telescope/telescope-fzf-native.nvim',
-            build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
+            build =
+            'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install',
             cond = function()
                 return vim.fn.executable('cmake') == 1
             end,
@@ -25,15 +26,17 @@ return {
                     enable_live_preview = true,
                     persist = {
                         enabled = true,
-                        path = vim.fn.stdpath('config') .. '/lua/tom/after/colorscheme.lua'}
+                        path = vim.fn.stdpath('config') .. '/lua/tom/after/colorscheme.lua'
+                    }
 
                 },
+                fzf = {},
             },
         })
 
 
         -- Load extensions
-        pcall(telescope.load_extension, 'fzf')
+        telescope.load_extension('fzf')
         pcall(telescope.load_extension, 'themes')
 
 
@@ -49,14 +52,17 @@ return {
         vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
         vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
         vim.keymap.set('n', '<leader>s/', builtin.current_buffer_fuzzy_find, { desc = '[S]earch current buffer' })
-        vim.keymap.set('n', '<leader>st', ':Telescope themes<CR>', {noremap = true, silent = true, desc ='[S]witch [T]hemes'})
+        vim.keymap.set('n', '<leader>st', ':Telescope themes<CR>',
+            { noremap = true, silent = true, desc = '[S]witch [T]hemes' })
         vim.keymap.set('n', '<leader>sf', function()
             builtin.find_files({
-                cwd = vim.fn.expand('%:p:h'),  -- directory of current buffer
+                cwd = vim.fn.expand('%:p:h'), -- directory of current buffer
             })
         end, { desc = '[S]earch [F]iles in current buffer directory' })
-
-
+        vim.keymap.set('n', '<leader>sn', function()
+            builtin.find_files {
+                cwd = vim.fn.stdpath('config') }
+        end, { desc = '[S]earch current [N]eovim config' })
     end
 
 }
