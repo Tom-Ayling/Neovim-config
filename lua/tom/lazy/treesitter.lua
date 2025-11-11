@@ -1,85 +1,57 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    branch = "main",
-    build = ":TSUpdate",
+    {
+        "nvim-treesitter/nvim-treesitter",
+        lazy = false,
+        branch = "main",
+        build = ":TSUpdate",
 
-    config = function()
-        require("nvim-treesitter").setup({
-            install_dir = vim.fn.stdpath("data") .. "/site",
-        })
-
-        -- List of core parsers to install
-        local ensureInstalled = {
-            "lua",
-            "python",
-            "latex",
-            "markdown",
-            "java",
-            "diff",
-            "html",
-            "css",
-            "vim",
-            "vimdoc",
-        }
-
-        local ignoreFileTypes = {
-            "TelescopePrompt",
-            "TelescopeResults",
-            "oil",
-            "netrw",
-        }
-
-        -- Install missing parsers on startup
-        local alreadyInstalled = require("nvim-treesitter.config").get_installed()
-        local parsersToInstall = vim.iter(ensureInstalled)
-            :filter(function(parser)
-                return not vim.tbl_contains(alreadyInstalled, parser)
-            end)
-            :totable()
-
-        if #parsersToInstall > 0 then
-            vim.schedule(function()
-                vim.notify(
-                    "Installing missing core parsers: " .. table.concat(parsersToInstall, ", "),
-                    vim.log.levels.INFO
-                )
-                require("nvim-treesitter").install(parsersToInstall):wait(120000)
-            end)
-        end
-
-        -- Auto-install missing parsers for FileType
-        local function ensure_parser_installed(lang)
-            if vim.tbl_contains(ignoreFileTypes, lang) then
-                return
-            end
-
-            local installed = require("nvim-treesitter.config").get_installed()
-            if not vim.tbl_contains(installed, lang) then
-                vim.schedule_wrap(function()
-                    vim.notify("Installing parser for filetype: " .. lang, vim.log.levels.INFO)
-                    require("nvim-treesitter").install({ lang }):wait(120000)
-                end)()
-            end
-        end
-
-        -- Enable Treesitter features
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = "*",
-            callback = function(args)
-                local lang = args.match
-                ensure_parser_installed(lang)
-
-                local installed = require("nvim-treesitter.config").get_installed()
-                if vim.tbl_contains(installed, lang) then
-                    -- Enable highlighting
-                    pcall(vim.treesitter.start)
-                    -- Enable indentation
-                    pcall(function()
-                        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-                    end)
-                end
-            end,
-        })
-    end,
+        config = function()
+            require("nvim-treesitter").setup({
+                install_dir = vim.fn.stdpath("data") .. "/site",
+            })
+        end,
+    },
+    {
+        "MeanderingProgrammer/treesitter-modules.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+            require("treesitter-modules").setup({
+                ensure_installed = {
+                    "lua",
+                    "python",
+                    "latex",
+                    "markdown",
+                    "java",
+                    "diff",
+                    "html",
+                    "css",
+                    "vim",
+                    "vimdoc",
+                },
+                ignore_install = {
+                    "TelescopePrompt",
+                    "TelescopeResults",
+                    "oil",
+                    "netrw",
+                },
+                sync_install = false,
+                auto_install = true,
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false,
+                },
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "<CR>",
+                        node_incremental = "<CR>",
+                        node_decremental = "<BS>",
+                    },
+                },
+                indent = {
+                    enable = true,
+                },
+            })
+        end,
+    },
 }
