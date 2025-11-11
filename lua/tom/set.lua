@@ -24,7 +24,7 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
--- Enable undofile
+-- Enable undofile, stores undo history between sessions
 vim.o.undofile = true
 
 -- Highlight text on yank
@@ -54,7 +54,7 @@ vim.o.showmode = false
 -- Decrease update time
 vim.o.updatetime = 250
 
--- Diagnostics settings
+-- Diagnostics settings (erros, warnings, etc... from external tools such as lsp)
 vim.diagnostic.config({
     virtual_text = true,   -- show diagnostic messages inline
     signs = true,          -- show signs in the gutter
