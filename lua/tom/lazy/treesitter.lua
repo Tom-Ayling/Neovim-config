@@ -1,34 +1,33 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    branch = 'main',
-    build = ':TSUpdate',
+    branch = "main",
+    build = ":TSUpdate",
 
     config = function()
-        require 'nvim-treesitter'.setup {
-            install_dir = vim.fn.stdpath('data') .. '/site',
-        }
+        require("nvim-treesitter").setup({
+            install_dir = vim.fn.stdpath("data") .. "/site",
+        })
 
         -- List of core parsers to install
         local ensureInstalled = {
-            'lua',
-            'python',
-            'latex',
-            'markdown',
-            'java',
-            'diff',
-            'html',
-            'css',
-            'vim',
-            'vimdoc',
+            "lua",
+            "python",
+            "latex",
+            "markdown",
+            "java",
+            "diff",
+            "html",
+            "css",
+            "vim",
+            "vimdoc",
         }
 
-
         local ignoreFileTypes = {
-            'TelescopePrompt',
-            'TelescopeResults',
-            'oil',
-
+            "TelescopePrompt",
+            "TelescopeResults",
+            "oil",
+            "netrw",
         }
 
         -- Install missing parsers on startup
@@ -59,14 +58,14 @@ return {
             if not vim.tbl_contains(installed, lang) then
                 vim.schedule_wrap(function()
                     vim.notify("Installing parser for filetype: " .. lang, vim.log.levels.INFO)
-                    require('nvim-treesitter').install({ lang }):wait(120000)
+                    require("nvim-treesitter").install({ lang }):wait(120000)
                 end)()
             end
         end
 
         -- Enable Treesitter features
-        vim.api.nvim_create_autocmd('FileType', {
-            pattern = '*',
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "*",
             callback = function(args)
                 local lang = args.match
                 ensure_parser_installed(lang)
