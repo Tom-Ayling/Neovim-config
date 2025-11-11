@@ -21,6 +21,10 @@ return {
                     ["@parameter.outer"] = "v", -- charwise
                     ["@function.outer"] = "V", -- linewise
                     ["@class.outer"] = "<c-v>", -- blockwise
+                    ["@conditional.outer"] = "V", -- select conditional statement linewise
+                    ["@conditional.inner"] = "v", -- select inner block charwise
+                    ["@loop.outer"] = "V", -- linewise selection for the entire loop
+                    ["@loop.inner"] = "v", -- charwise selection for the body
                 },
                 -- If you set this to `true` (default is `false`) then any textobject is
                 -- extended to include preceding or succeeding whitespace. Succeeding
@@ -37,21 +41,47 @@ return {
 
         -- keymaps
         -- You can use the capture groups defined in `textobjects.scm`
+        -- keymaps
+        -- You can use the capture groups defined in `textobjects.scm`
         vim.keymap.set({ "x", "o" }, "af", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
-        end)
+        end, { desc = "Select around function" })
+
         vim.keymap.set({ "x", "o" }, "if", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
-        end)
+        end, { desc = "Select inside function" })
+
         vim.keymap.set({ "x", "o" }, "ac", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
-        end)
+        end, { desc = "Select around class" })
+
         vim.keymap.set({ "x", "o" }, "ic", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
-        end)
+        end, { desc = "Select inside class" })
+
         -- You can also use captures from other query groups like `locals.scm`
         vim.keymap.set({ "x", "o" }, "as", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
-        end)
+        end, { desc = "Select local scope" })
+
+        -- Outer if statement
+        vim.keymap.set({ "x", "o" }, "ai", function()
+            require("nvim-treesitter-textobjects.select").select_textobject("@conditional.outer", "textobjects")
+        end, { desc = "Select around if statement" })
+
+        -- Inner if block
+        vim.keymap.set({ "x", "o" }, "ii", function()
+            require("nvim-treesitter-textobjects.select").select_textobject("@conditional.inner", "textobjects")
+        end, { desc = "Select inside if statement" })
+
+        -- Outer for loop
+        vim.keymap.set({ "x", "o" }, "alo", function()
+            require("nvim-treesitter-textobjects.select").select_textobject("@loop.outer", "textobjects")
+        end, { desc = "Select around loop" })
+
+        -- Inner for loop
+        vim.keymap.set({ "x", "o" }, "ilo", function()
+            require("nvim-treesitter-textobjects.select").select_textobject("@loop.inner", "textobjects")
+        end, { desc = "Select inside loop" })
     end,
 }
