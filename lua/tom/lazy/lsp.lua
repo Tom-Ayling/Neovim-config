@@ -186,6 +186,28 @@ return {
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		vim.lsp.config["ltex_plus"] = {
 
+			filetypes = {
+				"bib",
+				"context",
+				-- "gitcommit",
+				-- "html",
+				-- "markdown",
+				"org",
+				"pandoc",
+				"plaintex",
+				"quarto",
+				"mail",
+				"mdx",
+				"rmd",
+				"rnoweb",
+				"rst",
+				"tex",
+				"latex",
+				-- "text",
+				"typst",
+				-- "xhtml",
+			},
+
 			settings = {
 				ltex = {
 					language = "en-GB",
