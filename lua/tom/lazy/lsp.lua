@@ -175,45 +175,8 @@ return {
 		--  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
 		-- local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-		-- Enable the following language servers
-		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-		--
-		--  Add any additional override configuration in the following tables. Available keys are:
-		--  - cmd (table): Override the default command used to start the server
-		--  - filetypes (table): Override the default list of associated filetypes for the server
-		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-		--  - settings (table): Override the default settings passed when initializing the server.
-		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-		vim.lsp.config["ltex_plus"] = {
-
-			filetypes = {
-				"bib",
-				"context",
-				-- "gitcommit",
-				-- "html",
-				-- "markdown",
-				"org",
-				"pandoc",
-				"plaintex",
-				"quarto",
-				"mail",
-				"mdx",
-				"rmd",
-				"rnoweb",
-				"rst",
-				"tex",
-				"latex",
-				-- "text",
-				"typst",
-				-- "xhtml",
-			},
-
-			settings = {
-				ltex = {
-					language = "en-GB",
-				},
-			},
-		}
+		--  To add a server add it below
+		--  To overwrite the settings for a given lsp add config to /lsp/after/lsp_name.lua
 		local servers = {
 			-- clangd = {},
 			-- gopls = {},
@@ -226,6 +189,8 @@ return {
 			-- But for many setups, the LSP (`ts_ls`) will work just fine
 			-- ts_ls = {},
 			--
+
+			ltex_plus = {},
 
 			pyright = {},
 
