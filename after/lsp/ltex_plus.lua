@@ -35,6 +35,34 @@ local language_id_mapping = {
 ---@type vim.lsp.Config
 return {
 	cmd = { "ltex-ls-plus" },
+	on_attach = function(client, bufnr)
+		require("ltex-utils").on_attach(bufnr)
+		local opts = { noremap = true, silent = true, buffer = bufnr }
+
+		-- Open custom dictionary modification window
+		vim.keymap.set(
+			"n",
+			"<leader>ld",
+			":LTeXUtils modify_dict<CR>",
+			vim.tbl_extend("force", opts, { desc = "Modify [L]atex [d]ictionary" })
+		)
+
+		-- Open hidden false positives window
+		vim.keymap.set(
+			"n",
+			"<leader>lp",
+			":LTeXUtils modify_hiddenFalsePositives<CR>",
+			vim.tbl_extend("force", opts, { desc = "Modify [L]atex false [p]ositives" })
+		)
+
+		-- Open disabled rules window
+		vim.keymap.set(
+			"n",
+			"<leader>lr",
+			":LTeXUtils modify_disabledRules<CR>",
+			vim.tbl_extend("force", opts, { desc = "Modify [L]atex disabled [r]ules" })
+		)
+	end,
 	filetypes = {
 		"bib",
 		"context",
