@@ -61,7 +61,7 @@ return {
 	end,
 	settings = {
 		ltex = {
-			language = { "en-GB" },
+			language = "en-GB",
 			enabled = {
 				"bib",
 				"context",
