@@ -54,10 +54,10 @@ vim.o.showmode = false
 -- Decrease update time
 vim.o.updatetime = 250
 
--- Diagnostics settings (erros, warnings, etc... from external tools such as lsp)
-vim.diagnostic.config({
-    virtual_text = true,   -- show diagnostic messages inline
-    signs = true,          -- show signs in the gutter
-    underline = true,      -- underline the problem
-    update_in_insert = false, -- don't update diagnostics while typing
-})
+-- -- Diagnostics settings (erros, warnings, etc... from external tools such as lsp)
+-- vim.diagnostic.config({
+--     virtual_text = true,   -- show diagnostic messages inline
+--     signs = true,          -- show signs in the gutter
+--     underline = true,      -- underline the problem
+--     update_in_insert = false, -- don't update diagnostics while typing
+-- })
