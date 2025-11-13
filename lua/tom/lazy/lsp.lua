@@ -7,19 +7,7 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		-- Useful status updates for LSP.
 		{ "j-hui/fidget.nvim", opts = {} },
-
-		-- {
-		--     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-		--     -- used for completion, annotations and signatures of Neovim apis
-		--     'folke/lazydev.nvim',
-		--     ft = 'lua',
-		--     opts = {
-		--         library = {
-		--             -- Load luvit types when the `vim.uv` word is found
-		--             { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-		--         },
-		--     },
-		-- },
+		"saghen/blink.cmp",
 	},
 	config = function()
 		-- Open Mason
@@ -172,11 +160,8 @@ return {
 			},
 		})
 
-		-- LSP servers and clients are able to communicate to each other what features they support.
-		--  By default, Neovim doesn't support everything that is in the LSP specification.
-		--  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
-		--  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-		-- local capabilities = require("blink.cmp").get_lsp_capabilities()
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		--  To add a server add it below
 		--  To overwrite the settings for a given lsp add config to /lsp/after/lsp_name.lua
