@@ -2,7 +2,7 @@ return {
 	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
-		dependencies = { "rafamadriz/friendly-snippets" },
+		dependencies = { "rafamadriz/friendly-snippets", "erooke/blink-cmp-latex" },
 
 		-- use a release tag to download pre-built binaries
 		version = "1.*",
@@ -45,7 +45,26 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "path", "snippets", "buffer", "latex" },
+				providers = {
+					latex = {
+						name = "Latex",
+						module = "blink-cmp-latex",
+						opts = {
+							-- Inserts the symbol unless in a tex file where it inserts the latex code
+							insert_command = function(ctx)
+								local ft = vim.api.nvim_get_option_value("filetype", {
+									scope = "local",
+									buf = ctx.bufnr,
+								})
+								if ft == "tex" then
+									return true
+								end
+								return false
+							end,
+						},
+					},
+				},
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
