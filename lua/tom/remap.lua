@@ -20,10 +20,13 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "[Y]ank line to system clipbo
 
 -- Format File using conform
 vim.keymap.set("n", "<leader>ff", function()
-	require("conform").format({ async = true })
+	require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format file with Conform" })
 
--- Enable or disable latex lsp
+------------------------------------------------------------
+-- START: Toggle Latex LSP (LTeX Plus) mapping <leader>gse
+------------------------------------------------------------
+
 vim.keymap.set("n", "<leader>gse", function()
 	local clients = vim.lsp.get_active_clients({ bufnr = 0 })
 	local attached = false
@@ -77,3 +80,7 @@ vim.keymap.set("n", "<leader>gse", function()
 	})
 	vim.notify("LTeX Plus enabled for this buffer", vim.log.levels.INFO)
 end, { desc = "Toggle Latex LSP" })
+
+------------------------------------------------------------
+-- END: Toggle Latex LSP (LTeX Plus) mapping <leader>gse
+------------------------------------------------------------
