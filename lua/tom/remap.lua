@@ -18,7 +18,10 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected lines up" }
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "[y]ank next motion to system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "[Y]ank line to system clipboard" })
 
-vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format, { desc = "[f]ormat [f]ile" })
+-- Format File using conform
+vim.keymap.set("n", "<leader>ff", function()
+	require("conform").format({ async = true })
+end, { desc = "Format file with Conform" })
 
 -- Enable or disable latex lsp
 vim.keymap.set("n", "<leader>gse", function()
