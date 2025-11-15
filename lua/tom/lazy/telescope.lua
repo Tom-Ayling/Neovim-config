@@ -6,9 +6,15 @@ return {
 		"nvim-lua/plenary.nvim",
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
-			build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install",
+			build = function()
+				if vim.loop.os_uname().sysname == "Windows" then
+					return "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install"
+				else
+					return "make"
+				end
+			end,
 			cond = function()
-				return vim.fn.executable("cmake") == 1
+				return vim.fn.executable("cmake") == 1 or vim.fn.executable("make") == 1
 			end,
 		},
 		"andrew-george/telescope-themes",
