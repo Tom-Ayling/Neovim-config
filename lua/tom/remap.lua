@@ -22,3 +22,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "[Y]ank line to system clipbo
 vim.keymap.set("n", "<leader>ff", function()
 	require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format file with Conform" })
+
+-- Jump to the beginning/end of the line
+vim.keymap.set("n", "<C-A>", "0", { desc = "Jump to the beginning of the line" })
+vim.keymap.set("n", "<C-E>", "$", { desc = "Jump to the end of the line" })
