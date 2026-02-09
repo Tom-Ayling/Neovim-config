@@ -64,6 +64,12 @@ return {
 					vim.diagnostic.open_float()
 				end, "Open Diagnostics under cursor")
 
+				-- Go to next diagnostic
+				map("]g", vim.diagnostic.goto_next, "Go to next diagnostic")
+
+				-- Go to previous diagnostic
+				map("[g", vim.diagnostic.goto_prev, "Go to previous diagnostic")
+
 				-- Open quickfix list of diagnostics
 				map("<leader>q", vim.diagnostic.setloclist, "Open diagnostic [Q]uickfix list")
 
@@ -180,7 +186,11 @@ return {
 
 			ltex_plus = {},
 
-			pyright = {},
+			-- pyright = {},
+
+			ruff = {},
+
+			gopls = {},
 
 			marksman = {},
 
