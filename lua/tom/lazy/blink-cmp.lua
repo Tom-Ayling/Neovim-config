@@ -10,7 +10,12 @@ return {
 				"supermaven-inc/supermaven-nvim",
 				opts = {
 					disable_inline_completion = false,
-					disable_keymaps = true,
+					disable_keymaps = false,
+					keymaps = {
+						accept_suggestion = "<M-y>",
+						clear_suggestion = "<C-]>",
+						accept_word = "<C-j>",
+					},
 				},
 			},
 		},
