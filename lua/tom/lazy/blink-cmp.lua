@@ -2,7 +2,18 @@ return {
 	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
-		dependencies = { "rafamadriz/friendly-snippets", "erooke/blink-cmp-latex" },
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"erooke/blink-cmp-latex",
+			{ "saghen/blink.compat", version = "2.*", opts = {} },
+			{
+				"supermaven-inc/supermaven-nvim",
+				opts = {
+					disable_inline_completion = false,
+					disable_keymaps = true,
+				},
+			},
+		},
 
 		-- use a release tag to download pre-built binaries
 		version = "1.*",
@@ -32,6 +43,9 @@ return {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 				-- Adjusts spacing to ensure icons are aligned
 				nerd_font_variant = "mono",
+				kind_icons = {
+					Supermaven = "󰧑",
+				},
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
@@ -45,8 +59,20 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "latex" },
+				default = { "lsp", "path", "snippets", "buffer", "latex", "supermaven" },
 				providers = {
+					supermaven = {
+						name = "supermaven",
+						module = "blink.compat.source",
+						score_offset = 100, -- Give high priority
+						-- add icons
+						transform_items = function(_, items)
+							for _, item in ipairs(items) do
+								item.kind_name = "Supermaven"
+							end
+							return items
+						end,
+					},
 					latex = {
 						name = "Latex",
 						module = "blink-cmp-latex",
