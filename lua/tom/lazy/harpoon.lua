@@ -34,11 +34,11 @@ return {
 		end
 
 		-- Open Harpoon via Telescope
-		vim.keymap.set("n", "<C-e>", function()
+		vim.keymap.set("n", "<C-M-e>", function()
 			toggle_telescope(harpoon:list())
 		end, { desc = "Open Harpoon (Telescope)" })
 
-		-- Add current file to Harpoon
+		-- Add current file to Harpoon leader a
 		vim.keymap.set("n", "<leader>a", function()
 			harpoon:list():add()
 		end, { desc = "Add file to Harpoon" })
@@ -48,7 +48,7 @@ return {
 			harpoon:list():prepend()
 		end, { desc = "Prepend file to Harpoon" })
 
-		-- Direct jumps to Harpoon items
+		-- Direct jumps to Harpoon items alt + q,w,e,r
 		vim.keymap.set("n", "<M-q>", function()
 			harpoon:list():select(1)
 		end, { desc = "Harpoon 1" })
@@ -62,7 +62,7 @@ return {
 			harpoon:list():select(4)
 		end, { desc = "Harpoon 4" })
 
-		-- Replace Harpoon item
+		-- Replace Harpoon item leader + alt + q,w,e,r
 		vim.keymap.set("n", "<leader><M-q>", function()
 			harpoon:list():replace_at(1)
 		end, { desc = "Harpoon: Replace slot 1" })
@@ -80,7 +80,7 @@ return {
 		end, { desc = "Harpoon: Replace slot 4" })
 
 		-- Navigate previous/next Harpoon entries
-		-- Ctrl + Shift + p / n
+		-- alt + p / n
 		vim.keymap.set("n", "<M-p>", function()
 			harpoon:list():prev()
 		end, { desc = "Harpoon: Previous file" })

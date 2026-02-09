@@ -41,18 +41,6 @@ vim.keymap.set("n", "<leader>ls", function()
 	vim.cmd('!start "" "' .. pdf .. '"')
 end, { desc = "[L]atex [S]ave and compile" })
 
--- Function to remove the current quickfix entry
-local function remove_qf_entry()
-	local qflist = vim.fn.getqflist()
-	local idx = vim.fn.line(".")
-	table.remove(qflist, idx)
-	vim.fn.setqflist(qflist, "r")
-end
-
--- Map it in quickfix window only
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "qf",
-	callback = function()
-		vim.api.nvim_buf_set_keymap(0, "n", "dd", ":lua remove_qf_entry()<CR>", { noremap = true, silent = true })
-	end,
-})
+-- Jump to the beginning/end of the line
+vim.keymap.set("n", "<C-A>", "0", { desc = "Jump to the beginning of the line" })
+vim.keymap.set("n", "<C-E>", "$", { desc = "Jump to the end of the line" })
