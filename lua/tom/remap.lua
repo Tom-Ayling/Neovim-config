@@ -44,3 +44,8 @@ end, { desc = "[L]atex [S]ave and compile" })
 -- Jump to the beginning/end of the line
 vim.keymap.set("n", "<C-A>", "0", { desc = "Jump to the beginning of the line" })
 vim.keymap.set("n", "<C-E>", "$", { desc = "Jump to the end of the line" })
+
+-- Toggle Supermaven
+vim.keymap.set("n", "<leader>lt", function()
+	require("supermaven-nvim.api").toggle()
+end, { desc = "Toggle Supermaven" })

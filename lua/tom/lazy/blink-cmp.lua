@@ -11,6 +11,9 @@ return {
 				opts = {
 					disable_inline_completion = false,
 					disable_keymaps = false,
+					condition = function()
+						return true
+					end,
 					keymaps = {
 						accept_suggestion = "<M-y>",
 						clear_suggestion = "<C-]>",
@@ -18,6 +21,7 @@ return {
 					},
 				},
 			},
+			{ "MahanRahmati/blink-nerdfont.nvim" },
 		},
 
 		-- use a release tag to download pre-built binaries
@@ -64,7 +68,7 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "latex", "supermaven" },
+				default = { "lsp", "path", "snippets", "buffer", "latex", "supermaven", "nerdfont" },
 				providers = {
 					supermaven = {
 						name = "supermaven",
@@ -77,6 +81,16 @@ return {
 							end
 							return items
 						end,
+					},
+
+					nerdfont = {
+						module = "blink-nerdfont",
+						name = "Nerd Fonts",
+						score_offset = 15, -- Tune by preference
+						opts = {
+							insert = true, -- Insert nerdfont icon (default) or complete its name
+							trigger = "\\", -- Customize the trigger. Defaults to ":"
+						},
 					},
 					latex = {
 						name = "Latex",
