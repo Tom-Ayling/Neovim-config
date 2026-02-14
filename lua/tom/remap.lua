@@ -25,7 +25,7 @@ end, { desc = "Format file with Conform" })
 
 -- Save and compile .tex files with pdflatex
 vim.keymap.set("n", "<leader>ls", function()
-	if vim.bo.filetype ~= "tex" then
+	if vim.bo.filetype ~= "tex" and vim.bo.filetype ~= "plaintex" then
 		vim.notify("Not a LaTeX file", vim.log.levels.WARN)
 		return
 	end

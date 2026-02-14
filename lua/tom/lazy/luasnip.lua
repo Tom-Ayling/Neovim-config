@@ -25,7 +25,15 @@ return {
 			ls.setup({
 				history = true,
 				update_events = "TextChanged,TextChangedI",
+				enable_autosnippets = true,
 			})
+
+			-- plaintex snippets will also work in tex files
+			ls.filetype_extend("tex", { "plaintex" })
+
+			vim.keymap.set("n", "<leader><leader>l", function()
+				vim.cmd("source " .. vim.fn.stdpath("config") .. "/lua/tom/lazy/luasnip.lua")
+			end, { desc = "Reload LuaSnip configuration" })
 
 			-- Change Choice (for choice nodes)
 			vim.keymap.set({ "i", "s" }, "<c-l>", function()
