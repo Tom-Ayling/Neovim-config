@@ -38,6 +38,7 @@ vim.keymap.set("n", "<leader>ls", function()
 
 	vim.cmd('lcd "' .. dir .. '"')
 	vim.cmd('!pdflatex.exe "' .. file .. '"')
+	vim.cmd('!pdflatex.exe "' .. file .. '"')
 	vim.cmd('!start "" "' .. pdf .. '"')
 end, { desc = "[L]atex [S]ave and compile" })
 
