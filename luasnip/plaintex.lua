@@ -35,4 +35,9 @@ return {
 			{ delimiters = "<>" }
 		)
 	),
+	s({
+		trig = "\\up",
+		dscr = "up to usepackage",
+		snippetType = "autosnippet",
+	}, fmt("\\usepackage{<>}", { i(1) }, { delimiters = "<>" })),
 }
