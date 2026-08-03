@@ -5,21 +5,21 @@ return {
 		dependencies = {
 			"erooke/blink-cmp-latex",
 			{ "saghen/blink.compat", version = "2.*", opts = {} },
-			{
-				"supermaven-inc/supermaven-nvim",
-				opts = {
-					disable_inline_completion = false,
-					disable_keymaps = false,
-					condition = function()
-						return true
-					end,
-					keymaps = {
-						accept_suggestion = "<M-y>",
-						clear_suggestion = "<C-]>",
-						accept_word = "<C-j>",
-					},
-				},
-			},
+			-- {
+			-- 	"supermaven-inc/supermaven-nvim",
+			-- 	opts = {
+			-- 		disable_inline_completion = false,
+			-- 		disable_keymaps = false,
+			-- 		condition = function()
+			-- 			return true
+			-- 		end,
+			-- 		keymaps = {
+			-- 			accept_suggestion = "<M-y>",
+			-- 			clear_suggestion = "<C-]>",
+			-- 			accept_word = "<C-j>",
+			-- 		},
+			-- 	},
+			-- },
 			{ "MahanRahmati/blink-nerdfont.nvim" },
 		},
 
