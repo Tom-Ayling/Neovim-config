@@ -6,6 +6,7 @@ On linux [Cmake 3.x](https://github.com/Kitware/CMake/releases/tag/v3.31.6) is r
 # Install
 - Install the requirements
 - Clone the repo into the neovim config dir (Appdata\Local\nvim on windows)
+- If telescope errors manually run `make -C ~/.local/share/nvim/lazy/telescope-fzf-native.nvim`
 
 # LSP/Formatter/Linter
 - :Mason or <leader>m to open mason where a list of LSPs/Linters/Formatters/DAPs can be found
